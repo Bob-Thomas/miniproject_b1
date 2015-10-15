@@ -1,0 +1,29 @@
+22 september 2015
+
+Bob, Leroy, Zahyr, Robbie, Sean
+
+
+MODULES IN ONS PROJECT:
+erkenning
+gui
+database
+encryption
+api
+
+
+graphical user interface:
+laat alle foto's zien die in een directory staan. De foto moet geselecteerd worden in interface. Als foto geselecteerd is,
+(erkenning), staat er kenteken in de foto? 
+
+zoja, api gaat met de gevonden kenteken naar de api voor meerdere gegevens.
+
+Gegevens worden ge-encrypted en worden opgeslagen in de database.
+
+
+WAT GAAN WE DOEN
+
+bob - api
+robbie - database	(sql lite database 3 QUERY/ORM)
+leroy - kenteken herkenning
+sean - encryption
+zahyr - interface

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="http://structorizer.fisch.lu/" text="&#34;PSD Parking Car&#34;" comment="" color="ffffff" type="program" style="nice">
+	<children>
+		<instruction text="&#34;select_image&#34;" comment="" color="ffffff" rotated="0"></instruction>
+		<alternative text="&#34;read_license_plate&#34;" comment="" color="ffffff">
+			<qTrue>
+				<alternative text="&#34;get_information_by_license_plate&#34;" comment="&#34;&#34;" color="ffffff">
+					<qTrue>
+						<alternative text="&#34;car_in_violation&#34;" comment="&#34;&#34;" color="ffffff">
+							<qTrue>
+								<instruction text="&#34;register_parking(&#34;&#34;violation&#34;&#34;)&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+							</qTrue>
+							<qFalse>
+								<instruction text="&#34;register_parking(&#34;&#34;parked&#34;&#34;)&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+							</qFalse>
+						</alternative>
+					</qTrue>
+					<qFalse>
+						<instruction text="&#34;error&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+					</qFalse>
+				</alternative>
+			</qTrue>
+			<qFalse>
+				<instruction text="&#34;error&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+			</qFalse>
+		</alternative>
+	</children>
+</root>
