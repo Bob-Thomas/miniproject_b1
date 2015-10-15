@@ -1,0 +1,63 @@
+{% extends "template.html" %}
+{% block content %}
+<div class="column all-cars">
+    <div class="head-bar">
+        <h1 class="white-title">WACHTLIJST</h1>
+    </div>
+    <div id="color-bar-red"></div>
+        {% for car in cars['all'] %}
+            <img class="cars" parked="{{ car['parked'] }}" id="{{ car['id'] }}" src="{{ car['image_path'] }}">
+        {%  endfor %}
+</div>
+
+<div class="column-button">
+    <form method="post">
+        <input id="id" type="hidden" name="id" value=""/>
+        <input id="car-action" type="hidden" name="car-action" value=""/>
+        <input class="button" disabled id="add-car" type="submit" name='action' value="IN-GARAGE" placeholder="IN-GARAGE">
+        <input class="button" disabled id="remove-car" type="submit" name="action" value="UIT-GARAGE"  placeholder="UIT-GARAGE">
+    </form>
+</div>
+
+<div class="column parked-cars">
+    <div class="head-bar">
+        <h1 class="white-title">IN-GARAGE</h1>
+    </div>
+    <div id="color-bar-blue">
+    </div>
+          {% for car in cars['parked'] %}
+            <img class="cars" license-plate="{{ car['license_plate'] }}" src="{{ car['image_path'] }}">
+        {%  endfor %}
+</div>
+
+<div class="column-history">
+    <div class="head-bar">
+        <h1 class="white-title">GARAGE HISTORY</h1>
+    </div>
+    <div id="color-bar-yella">
+    </div>
+    <div id="list">
+        <ul>
+            <li>ID</li>
+            <li>KENTEKEN</li>
+            <li>STATUS</li>
+        </ul>
+    </div>
+    <div id="loop">
+    {% for car in car_parked['all'] %}
+            <p> <span id="list-id">{{ car['id'] }}</span> <span id="list-plate">{{ car['license_plate'] }}</span> <span id="list-status">{{ car['status'] }}</span></p>
+    {%  endfor %}
+    </div>
+</div>
+
+<div id="info-column">
+    <div class="head-bar">
+        <h1 class="white-title">STATUS</h1>
+    </div>
+    <div id="color-bar-yellow"></div>
+    <div id="result_image"></div>
+    <div id="result">
+        <h1 id="result-style">{{ error }}</h1>
+    </div>
+</div>
+{% endblock %}
