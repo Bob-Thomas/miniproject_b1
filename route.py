@@ -34,23 +34,32 @@ encryptor = Encryptor()
 imported module and function Encryptor() is assigned a variable for easier use.
 '''
 
+print("Setting up configuration and render page...\n")
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    """
+
+    '''
     Defines the homepage to get methods ('GET') or ('POST') passed through the page. and runs the codes below in the homepage.
-    """
+    '''
     error = ""
     if request.method == 'POST':
         if request.form['action'] == "IN-GARAGE":
+            print("IN-GARAGE buttton pressed, loading script\n")
             if request.form['car-action'] == "park":
+                print("Car is going to be parked\n")
                 plate = automatic_plate_recognition.get_plate(os.path.join(os.getcwd(), request.form['id']))
-                print(plate)
+                print("Getting the license plate of the car to be parked from image, with OpenAlpr: " + plate)
                 if plate != 'error':
                     car_info = api.request_information(plate)
+                    print("\n Requesting plate: " + plate + " for information from RDW database\n")
                     if car_info != "No data found":
+                        print("Encrypting all information found in the database...\n")
                         encoded = encryptor.encrypt(str(car_info))
-                        status = "PARKED" if car_info['parkerentoegestaan'] == "Ja" else 'VIOLATION'
+                        print("Information has been encrypoted and stored in the garage database using Py.Crypto\n")
+                        status = "PARKED"\
+                            if car_info['parkerentoegestaan'] == "Ja" else 'VIOLATION' and print("Car FLAGGED! Car with license plate: " + plate + " is not allowed to be parked here and has been flagged.")
+                        print("The car is parked!")
                         database.register_parking(plate, encoded.decode("UTF-8").rstrip('{'), request.form['id'],
                                                   status)
                     else:
@@ -60,9 +69,12 @@ def home():
             else:
                  error = "Car is already parked"
         elif request.form['action'] == "UIT-GARAGE":
+            print("UIT-GARGAE button pressed loading script for removal \n")
             if request.form['car-action'] == "remove":
+                print("Car is getting out of garage...\n")
                 plate = request.form['id']
                 database.finish_parking(plate)
+                print("Car with number place: " + str(plate) + " removed from garage and stored in history database")
             else:
                 error = "Car not in parking"
     cars = {
@@ -81,7 +93,6 @@ def home():
     renders the homepage with variable passed as cars, error and car_parked
 '''
 
-
 @app.route('/car/<id>')
 def car(id=None):
     return jsonify(database.get_car_by_plate(id))
@@ -92,7 +103,6 @@ Gets the JSON fine from RWD database and renders the file in browser.
 
 if __name__ == "__main__":
     app.run(debug=True, port=666)
-
 
 '''
 Runs the whole application on debugging mode and on port 666 for testing and feedback
