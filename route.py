@@ -34,11 +34,12 @@ encryptor = Encryptor()
 imported module and function Encryptor() is assigned a variable for easier use.
 '''
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    '''
+    """
     Defines the homepage to get methods ('GET') or ('POST') passed through the page. and runs the codes below in the homepage.
-    '''
+    """
     error = ""
     if request.method == 'POST':
         if request.form['action'] == "IN-GARAGE":
@@ -79,6 +80,7 @@ def home():
 '''
     renders the homepage with variable passed as cars, error and car_parked
 '''
+
 
 @app.route('/car/<id>')
 def car(id=None):
