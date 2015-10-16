@@ -8,13 +8,6 @@ base64 is used for encoding, which means to put data in a specific format.
 It is not to be confused with encryption, which is used for disguising data.
 """
 
-import os
-
-"""
-os is for urandom, which is an accepted producer of randomness that is suitable for cryptology.
-"""
-
-
 class Encryptor:
     encoded = ""
     decoded = ""
@@ -31,9 +24,8 @@ class Encryptor:
     def __init__(self):
         self.secret = config.SECRET
         """
-        Generate a randomized secret key with the help of urandom.
+        Imports the key that corresponds with this code.
         """
-
 
     def encrypt(self, private_info):
         pad = lambda s: s + (self.block_size - len(s) % self.block_size) * self.padding
